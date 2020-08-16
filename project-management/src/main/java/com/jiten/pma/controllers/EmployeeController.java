@@ -16,12 +16,19 @@ public class EmployeeController {
 
 	@Autowired
 	EmployeeRepository employeeRepository;
+	
+	@GetMapping
+	public String displayEmployees(Model model) {
+		Employee employee = new Employee();
+		model.addAttribute("employee", employee);
+		return "employees/list-employees";
+	}
 
 	@GetMapping("/new")
 	public String displayEmployeeForm(Model model) {
 		Employee employee = new Employee();
 		model.addAttribute("employee", employee);
-		return "new-employee";
+		return "employees/new-employee";
 	}
 
 	@PostMapping("/save")
