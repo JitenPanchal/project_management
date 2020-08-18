@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jiten.dao.EmployeeRepository;
 import com.jiten.dao.ProjectRepository;
 import com.jiten.pma.entities.Employee;
 import com.jiten.pma.entities.Project;
@@ -19,7 +21,10 @@ public class ProjectController {
 
 	@Autowired
 	ProjectRepository projectRepository;
-	
+
+	@Autowired
+	EmployeeRepository employeeRepository;
+
 	@GetMapping
 	public String displayProjects(Model model) {
 		List<Project> projects = projectRepository.findAll();
@@ -27,17 +32,21 @@ public class ProjectController {
 		return "projects/list-projects";
 	}
 
-
 	@GetMapping("/new")
 	public String displayProjectForm(Model model) {
 		Project aProject = new Project();
 		model.addAttribute("project", aProject);
+
+		List<Employee> employees = employeeRepository.findAll();
+		model.addAttribute("allEmployees", employees);
+
 		return "projects/new-project";
 	}
 
 	@PostMapping("/save")
-	public String createProject(Project project, Model model) {
+	public String createProject(Project project, @RequestParam List<Long> employees, Model model) {
 		projectRepository.save(project);
+		
 		return "redirect:/projects/new";
 	}
 }

@@ -1,5 +1,7 @@
 package com.jiten.pma.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jiten.dao.EmployeeRepository;
 import com.jiten.pma.entities.Employee;
+import com.jiten.pma.entities.Project;
 
 @Controller
 @RequestMapping("/employees")
@@ -19,8 +22,7 @@ public class EmployeeController {
 	
 	@GetMapping
 	public String displayEmployees(Model model) {
-		Employee employee = new Employee();
-		model.addAttribute("employee", employee);
+		model.addAttribute("employees", employeeRepository.findAll());
 		return "employees/list-employees";
 	}
 
