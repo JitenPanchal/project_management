@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jiten.dao.EmployeeRepository;
 import com.jiten.dao.ProjectRepository;
+import com.jiten.dto.ChartData;
 import com.jiten.pma.entities.Employee;
 import com.jiten.pma.entities.Project;
 
@@ -46,7 +49,23 @@ public class ProjectController {
 	@PostMapping("/save")
 	public String createProject(Project project, @RequestParam List<Long> employees, Model model) {
 		projectRepository.save(project);
-		
+
 		return "redirect:/projects/new";
 	}
+
+//	@GetMapping("/timelines")
+//	public String displayProjectTimelines(Model model) throws JsonProcessingException {
+//
+//		List<ChartData> timelineData = projectRepository.getTimeData();
+//
+//		ObjectMapper objectMapper = new ObjectMapper();
+//		String jsonTimelineString = objectMapper.writeValueAsString(timelineData);
+//
+//		System.out.println("---------- project timelines ----------");
+//		System.out.println(jsonTimelineString);
+//
+//		model.addAttribute("projectTimeList", jsonTimelineString);
+//
+//		return "projects/project-timelines";
+//	}
 }

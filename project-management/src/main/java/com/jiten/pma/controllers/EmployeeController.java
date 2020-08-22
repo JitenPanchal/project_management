@@ -16,10 +16,19 @@ import com.jiten.pma.entities.Project;
 @Controller
 @RequestMapping("/employees")
 public class EmployeeController {
-
-	@Autowired
+	
 	EmployeeRepository employeeRepository;
 	
+	@Autowired
+	public void setEmployeeRepository(EmployeeRepository employeeRepository) {
+		this.employeeRepository = employeeRepository;
+	}
+
+	public EmployeeController(EmployeeRepository employeeRepository) {
+		super();
+		this.employeeRepository = employeeRepository;
+	}
+
 	@GetMapping
 	public String displayEmployees(Model model) {
 		model.addAttribute("employees", employeeRepository.findAll());

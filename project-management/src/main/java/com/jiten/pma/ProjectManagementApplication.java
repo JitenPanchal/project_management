@@ -15,9 +15,12 @@ import com.jiten.dao.EmployeeRepository;
 import com.jiten.dao.ProjectRepository;
 import com.jiten.pma.entities.Employee;
 import com.jiten.pma.entities.Project;
+import com.jiten.pma.springExample.Car;
+import com.jiten.pma.springExample.Engine;
 
-@SpringBootApplication
-@ComponentScan({"com.jiten.dao", "com.jiten.pma.controllers"})
+@SpringBootApplication(scanBasePackages = {"com.jiten.*"})
+//@ComponentScan({"com.jiten.dao", "com.jiten.pma.controllers", "com.jiten.pma.springExample"})
+//@ComponentScan({"com.jiten.*"})
 @EntityScan("com.jiten.pma.entities")
 @EnableJpaRepositories("com.jiten.dao")
 public class ProjectManagementApplication {
@@ -31,6 +34,9 @@ public class ProjectManagementApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectManagementApplication.class, args);
 	}
+	
+	
+	
 	
 //	@Bean
 //	CommandLineRunner runner() {
