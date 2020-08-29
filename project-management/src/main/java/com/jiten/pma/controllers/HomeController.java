@@ -14,7 +14,6 @@ import com.jiten.dao.EmployeeRepository;
 import com.jiten.dao.ProjectRepository;
 import com.jiten.dto.ChartData;
 import com.jiten.dto.EmployeeProject;
-import com.jiten.pma.entities.Employee;
 import com.jiten.pma.entities.Project;
 import com.jiten.pma.springExample.Car;
 
